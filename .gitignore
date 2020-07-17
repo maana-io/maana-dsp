@@ -2,3 +2,4 @@
 **/__pycache__/
 *.py[cod]
 .auth.env
+.DS_Store
