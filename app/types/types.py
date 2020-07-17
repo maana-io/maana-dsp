@@ -147,9 +147,9 @@ type Query {
   computeResultant(accelerations: [AccelerationAsInput!]!): [Resultant!]!
   computeIntensity(fftMagnitudes: [FFTMagnitudeAsInput], filter: FilterAsInput, fftpoints: Int!): Intensity
   makeButterworthFilter(filter: FilterAsInput): IIRFilterPolynomials
-  lfilter1D(iirFilterPolynomials: IIRFilterPolynomialsAsInput, dataToFilter: [Float]): FilteredResult
+  lfilter1D(iirFilterPolynomials: IIRFilterPolynomialsAsInput, dataToFilter: [ResultantAsInput]): FilteredResult
   computeImpact(intensity: IntensityAsInput!): Impact!
-  compute1DDFT(input: [FFTInputAsInput!]!, points: Int!): [FFTMagnitudeOutput!]!
+  compute1DDFT(input: FFTInputAsInput!, points: Int!): [FFTMagnitudeOutput!]!
   createData: Boolean
   projectData: [Acceleration]
   CKGErrors: [String]

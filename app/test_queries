@@ -51,3 +51,22 @@ query {
   }
 }
 
+query {
+  lfilter1D(iirFilterPolynomials: {
+    id: "filter",
+    numerator: [1.0, 1.0],
+    denominator: [2.0,2.0]
+  }
+  dataToFilter:[{
+    id: "id"
+    value: 1.0
+  },
+    {
+    id: "id"
+    value: 1.0
+  }
+  ]){
+    id
+    values
+  }
+}

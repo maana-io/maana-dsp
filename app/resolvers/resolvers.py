@@ -2,7 +2,9 @@ from __future__ import division
 # imports
 import math
 import json
+import scipy
 from scipy.signal import butter, lfilter
+from scipy.fftpack import fft
 import numpy as np
 import pandas as pd
 # helpers
@@ -46,7 +48,7 @@ def resolver_make_butterwork_filter_mapper(query):
     query.set_field("makeButterworthFilter", make_butterworth_filter)
 
 def resolver_lfilter_1D_mapper(query):
-    query.set_field("lfilter1D", lfilter)
+    query.set_field("lfilter1D", lfilter1D)
 
 def resolver_compute_intensity(query):
     query.set_field("computeIntensity", compute_intensity)
@@ -96,12 +98,13 @@ def create_data(*_):
     else:
         return False
 
-def compute_1D_DFT(*_, FFTInput, points):
+def compute_1D_DFT(*_, input, points):
 
-    data = map(returnArray, FFTInput)
-    fft = np.fft.ftt(data, n=points)
+    #data = map(returnArray, input)
+    data = input["values"]
+    fft = np.fft.fft(data, n=points)
     mag = np.abs(fft)/(points/2)
-    return map(convertMagnitude, mag)
+    return list(map(convertMagnitude, mag))
 
 def compute_impact(*_, intensity):
     if(intensity["value"]> 10):
@@ -121,7 +124,7 @@ def compute_intensity(*_, fftMagnitudes, filter, fftpoints):
     fc = filter["filterFrequencies"]["highCutOff"]["value"]
     kc = int((fftpoints/fs)* fc) + 1
 
-    magnitudes = map(returnArray, fftMagnitudes)
+    magnitudes = list(map(returnArray, fftMagnitudes))
 
     f = []
     for i in range(0, fftpoints/2):
@@ -136,7 +139,7 @@ def compute_intensity(*_, fftMagnitudes, filter, fftpoints):
     }
 
 def compute_resultant(*_, accelerations):
-    return map(getResultant, accelerations) 
+    return list(map(getResultant, accelerations))
 
 def make_butterworth_filter(*_, filter):
     nyq = 0.5 * filter["filterFrequencies"]["samplingFrequency"]["value"]
@@ -151,6 +154,11 @@ def make_butterworth_filter(*_, filter):
         "denominator": a,
     }
 
-def lfilter1D(*_, polynomials, data):
-    y = lfilter(polynomials["numerator"], polynomials["denominator"], data)
-    return map(convertFilteredResult, y)
+def lfilter1D(*_, iirFilterPolynomials, dataToFilter):
+    data = list(map(returnArray, dataToFilter))
+    y = lfilter(iirFilterPolynomials["numerator"], iirFilterPolynomials['denominator'], data)
+    #return list(map(convertFilteredResult, y))
+    return {
+        "id": "filtered result",
+        "values": y
+    }
