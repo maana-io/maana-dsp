@@ -1,4 +1,38 @@
 query{
+  computeBoneHealthImpact(
+    filter: {
+      id: "filter"
+      function: {
+        id: "band"
+      }
+      filterOrder: 5
+      filterFrequencies:{
+        id: "freqs"
+        lowCutOff:{
+          id: "low"
+          value: 0.1
+          unit: "hz"
+        }
+        highCutOff:{
+          id: "high"
+          value: 6
+          unit: "hz"
+        }
+        samplingFrequency:{
+          id: "fs"
+          value: 20
+          unit: "hz"
+        }
+      }
+    } 
+    fftPoints: 512
+  ){
+    id
+    positive
+  }
+}
+
+query{
   computeResultant(accelerations:[
     {
       id: "accel1",
@@ -84,45 +118,3 @@ query {
   }
 }
 
-query {
-  computeIntensity(
-    fftMagnitudes: [{
-      id: "mag",
-      value: 0.0117
-    },
-      {
-      id: "mag1",
-      value: 0.0117
-    }
-    ]
-    fftpoints:512
-    filter: {
-      id: "filter"
-      filterOrder: 5
-      function: {
-        id:"band"
-      }
-      filterFrequencies:{
-        id: "freqs"
-        lowCutOff:{
-          id: "low"
-          value: 0.1
-          unit: "hz"
-        }
-        highCutOff:{
-          id: "high"
-          value: 6
-          unit: "hz"
-        }
-        samplingFrequency:{
-          id: "fs"
-          value:20
-          unit: "hz"
-        }
-      }
-    }
-  ){
-    id
-    value
-  }
-}
