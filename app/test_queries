@@ -1,0 +1,53 @@
+query{
+  computeResultant(accelerations:[
+    {
+      id: "accel1",
+      x: 1.0
+      y: 1.0
+      z: 1.0
+    }
+    {
+      id: "accel2",
+      x: 2.0
+      y: 2.0
+      z: 2.0
+    }
+  ]){
+    id
+    value
+  }
+}
+
+
+query {
+  makeButterworthFilter(filter:{
+    id: "filter",
+    filterOrder: 5,
+    filterFrequencies:{
+      id: "freqs",
+      highCutOff: {
+        id: "hc",
+        value: 6.0
+        unit: "hz"
+      }
+      lowCutOff:  {
+        id: "lc",
+        value: 0.1
+        unit: "hz"
+      }
+      samplingFrequency: {
+        id: "fs",
+        value: 20
+        unit: "hz"
+      }
+    }
+    function:{
+      id: "band"
+    }
+  }){
+    id
+    numerator
+    denominator
+  }
+}
+
