@@ -107,7 +107,7 @@ def compute_1D_DFT(*_, input, points):
     return list(map(convertMagnitude, mag))
 
 def compute_impact(*_, intensity):
-    if(intensity["value"]> 10):
+    if(intensity["value"] > 10):
         return {
             "id": "impact",
             "positive": True
@@ -115,7 +115,7 @@ def compute_impact(*_, intensity):
     else:
         return {
             "id": "impact",
-            "postive": False
+            "positive": False
         }
 
 def compute_intensity(*_, fftMagnitudes, filter, fftpoints):
@@ -127,7 +127,7 @@ def compute_intensity(*_, fftMagnitudes, filter, fftpoints):
     magnitudes = list(map(returnArray, fftMagnitudes))
 
     f = []
-    for i in range(0, fftpoints/2):
+    for i in range(0, int(fftpoints/2)+1):
         f.append((fs*i)/fftpoints)
 
     for k in range(0, kc):

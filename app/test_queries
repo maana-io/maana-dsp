@@ -70,3 +70,59 @@ query {
     values
   }
 }
+
+query {
+  compute1DDFT(
+    input: {
+      id:"mag",
+      values: [1.0, 1.0, 1.0]
+    }
+    points: 512
+  ){
+    id
+    value
+  }
+}
+
+query {
+  computeIntensity(
+    fftMagnitudes: [{
+      id: "mag",
+      value: 0.0117
+    },
+      {
+      id: "mag1",
+      value: 0.0117
+    }
+    ]
+    fftpoints:512
+    filter: {
+      id: "filter"
+      filterOrder: 5
+      function: {
+        id:"band"
+      }
+      filterFrequencies:{
+        id: "freqs"
+        lowCutOff:{
+          id: "low"
+          value: 0.1
+          unit: "hz"
+        }
+        highCutOff:{
+          id: "high"
+          value: 6
+          unit: "hz"
+        }
+        samplingFrequency:{
+          id: "fs"
+          value:20
+          unit: "hz"
+        }
+      }
+    }
+  ){
+    id
+    value
+  }
+}
