@@ -121,6 +121,7 @@ input IIRFilterPolynomialsAsInput {
 type Impact {
   id: ID!
   positive: Boolean!
+  message: String
 }
 
 type Info {
@@ -150,7 +151,7 @@ type Query {
   lfilter1D(iirFilterPolynomials: IIRFilterPolynomialsAsInput, dataToFilter: [ResultantAsInput]): [FilteredResult!]!
   computeImpact(intensity: IntensityAsInput!): Impact!
   compute1DDFT(input: [FFTInputAsInput!]!, points: Int!): [FFTMagnitudeOutput!]!
-  createData: Boolean
+  createData(factor: Int): Boolean
   projectData: [Acceleration]
   CKGErrors: [String]
 }

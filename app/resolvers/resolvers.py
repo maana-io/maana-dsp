@@ -73,24 +73,26 @@ def project_data(*_):
             return data
 
 
-def create_data(*_):
+def create_data(*_, factor):
     pathIn = '../app/data/sample.csv'
     sampleData = pd.read_csv(pathIn)
-
+    
+    if(factor):
+        factor = factor
+    else:
+        factor = 1
     jsonData = []
     if(len(sampleData)>0):
         for k in range(0, len(sampleData)):
             accelKind = {
                 "id": sampleData["time"].loc[k],
-                "x": sampleData["acceleration_x"].loc[k],
-                "y": sampleData["acceleration_y"].loc[k],
-                "z": sampleData["acceleration_z"].loc[k]
+                "x": sampleData["acceleration_x"].loc[k] * factor,
+                "y": sampleData["acceleration_y"].loc[k] * factor,
+                "z": sampleData["acceleration_z"].loc[k] * factor
             }
 
             jsonData.append(accelKind)
             print(len(jsonData))
-        
-       
         #write to file
         with open('sample.json', 'w') as outfile:
             json.dump(jsonData, outfile)
@@ -110,12 +112,14 @@ def compute_impact(*_, intensity):
     if(intensity["value"] > 10):
         return {
             "id": "impact",
-            "positive": True
+            "positive": True,
+            "message": "Great, postitive bone impact!"
         }
     else:
         return {
             "id": "impact",
-            "positive": False
+            "positive": False,
+            "message": "try and up the intensity"
         }
 
 def compute_intensity(*_, fftMagnitudes, filter, fftpoints):

@@ -4,6 +4,44 @@
 
 https://lastknowngood.knowledge.maana.io/workspace/fe75c4bb-e752-437c-af2e-fe5605fadd41
 
+To use: 
+
+run the createData function in the workspace setting a factor of 1 
+run computeBoneHealthImpact function
+
+result: (the intensity for the sample data set is 1.97... and so is under the 10 threshold)
+```
+{
+  "data": {
+    "computeBoneHealthImpact": {
+      "id": "impact",
+      "positive": false,
+      "message": "try and up the intensity"
+    }
+  }
+}
+```
+
+run the createData function again with a factor of 10 (increases accelerations )
+clear the computeBoneHealthImpact function cache
+run computeBoneHealthImpact function
+
+result
+```
+{
+  "data": {
+    "computeBoneHealthImpact": {
+      "id": "impact",
+      "positive": false,
+      "message": "try and up the intensity"
+    }
+  }
+}
+```
+
+
+
+
 ## Idea
 
 The idea here is to provide some basic DSP functionality

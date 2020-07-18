@@ -1,4 +1,7 @@
-query{
+query createData{
+  createData(factor: 1)
+}
+query computeImpact{
   computeBoneHealthImpact(
     filter: {
       id: "filter"
@@ -28,7 +31,8 @@ query{
     fftPoints: 512
   ){
     id
-    positive
+   positive
+    message
   }
 }
 
