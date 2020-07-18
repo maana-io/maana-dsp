@@ -32,8 +32,8 @@ result
   "data": {
     "computeBoneHealthImpact": {
       "id": "impact",
-      "positive": false,
-      "message": "try and up the intensity"
+      "positive": true,
+      "message": "Great, postitive bone impact!"
     }
   }
 }
