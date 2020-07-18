@@ -1,5 +1,9 @@
 # Maana Q Knowledge Microservice - maana-dsp-python
 
+## Q Workspace
+
+https://lastknowngood.knowledge.maana.io/workspace/fe75c4bb-e752-437c-af2e-fe5605fadd41
+
 ## Idea
 
 The idea here is to provide some basic DSP functionality

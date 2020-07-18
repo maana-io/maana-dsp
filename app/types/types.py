@@ -30,12 +30,12 @@ scalar DateTime
 
 type FFTInput {
   id: ID!
-  values: [Float]!
+  value: [Float]!
 }
 
 input FFTInputAsInput {
   id: ID!
-  values: [Float!]!
+  value: Float!
 }
 
 type FFTMagnitude {
@@ -69,7 +69,7 @@ input FilterAsInput {
 
 type FilteredResult {
   id: ID!
-  values: [Float!]!
+  value: Float!
 }
 
 type FilterFrequencies {
@@ -147,9 +147,9 @@ type Query {
   computeResultant(accelerations: [AccelerationAsInput!]!): [Resultant!]!
   computeIntensity(fftMagnitudes: [FFTMagnitudeAsInput], filter: FilterAsInput, fftpoints: Int!): Intensity
   makeButterworthFilter(filter: FilterAsInput): IIRFilterPolynomials
-  lfilter1D(iirFilterPolynomials: IIRFilterPolynomialsAsInput, dataToFilter: [ResultantAsInput]): FilteredResult
+  lfilter1D(iirFilterPolynomials: IIRFilterPolynomialsAsInput, dataToFilter: [ResultantAsInput]): [FilteredResult!]!
   computeImpact(intensity: IntensityAsInput!): Impact!
-  compute1DDFT(input: FFTInputAsInput!, points: Int!): [FFTMagnitudeOutput!]!
+  compute1DDFT(input: [FFTInputAsInput!]!, points: Int!): [FFTMagnitudeOutput!]!
   createData: Boolean
   projectData: [Acceleration]
   CKGErrors: [String]

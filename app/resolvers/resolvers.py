@@ -100,8 +100,8 @@ def create_data(*_):
 
 def compute_1D_DFT(*_, input, points):
 
-    #data = map(returnArray, input)
-    data = input["values"]
+    data = list(map(returnArray, input))
+    #data = input["values"]
     fft = np.fft.fft(data, n=points)
     mag = np.abs(fft)/(points/2)
     return list(map(convertMagnitude, mag))
@@ -157,8 +157,8 @@ def make_butterworth_filter(*_, filter):
 def lfilter1D(*_, iirFilterPolynomials, dataToFilter):
     data = list(map(returnArray, dataToFilter))
     y = lfilter(iirFilterPolynomials["numerator"], iirFilterPolynomials['denominator'], data)
-    #return list(map(convertFilteredResult, y))
-    return {
-        "id": "filtered result",
-        "values": y
-    }
+    return list(map(convertFilteredResult, y))
+    #return {
+    #    "id": "filtered result",
+    #    "values": y
+    #}
